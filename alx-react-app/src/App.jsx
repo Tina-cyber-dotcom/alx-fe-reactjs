@@ -5,20 +5,13 @@ import './App.css'
 import WelcomeMessage from './components/WelcomeMessage'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <WelcomeMessage />
-
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
+      <Header />
+      <MainContent />
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
