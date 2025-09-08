@@ -2,34 +2,36 @@ function MainContent() {
   return (
     <main
       style={{
-        padding: "20px",
-        backgroundColor: "#e6f7ff",
-        minHeight: "200px",
-        borderRadius: "10px",
+        padding: "25px",
+        backgroundColor: "#f0f8ff", // light blue background
+        minHeight: "250px",
+        border: "2px solid #ccc",
+        borderRadius: "12px",
         margin: "20px",
-        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
       }}
     >
       <h2
         style={{
           textAlign: "center",
-          color: "teal",
-          marginBottom: "15px",
+          color: "#006666",
           fontSize: "28px",
+          marginBottom: "20px",
+          textTransform: "uppercase",
         }}
       >
         Welcome to My City List
       </h2>
       <p
         style={{
-          lineHeight: "1.6",
-          fontSize: "16px",
+          lineHeight: "1.8",
+          fontSize: "18px",
           textAlign: "justify",
-          color: "#333",
+          color: "#444",
         }}
       >
-        Here you’ll find some of my favorite cities from around the world, each
-        with unique cultures, landmarks, and experiences to explore. 🌍
+        Here you’ll find some of my favorite cities from around the world. Each
+        city has unique cultures, landmarks, and unforgettable experiences to
+        explore. 🌍
       </p>
     </main>
   );
