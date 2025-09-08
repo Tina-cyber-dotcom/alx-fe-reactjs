@@ -1,14 +1,38 @@
-import React from "react";
-
-const MainContent = () => {
+function MainContent() {
   return (
-    <main style={{ padding: "20px", backgroundColor: "#f0f8ff", minHeight: "200px" }}>
-      <h2 style={{ color: "darkgreen", textAlign: "center" }}>Welcome to the Travel Page</h2>
-      <p style={{ textAlign: "center", marginTop: "10px" }}>
-        Explore amazing places around the world and meet wonderful people.
+    <main
+      style={{
+        padding: "20px",
+        backgroundColor: "#e6f7ff",
+        minHeight: "200px",
+        borderRadius: "10px",
+        margin: "20px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+      }}
+    >
+      <h2
+        style={{
+          textAlign: "center",
+          color: "teal",
+          marginBottom: "15px",
+          fontSize: "28px",
+        }}
+      >
+        Welcome to My City List
+      </h2>
+      <p
+        style={{
+          lineHeight: "1.6",
+          fontSize: "16px",
+          textAlign: "justify",
+          color: "#333",
+        }}
+      >
+        Here you’ll find some of my favorite cities from around the world, each
+        with unique cultures, landmarks, and experiences to explore. 🌍
       </p>
     </main>
   );
-};
+}
 
 export default MainContent;
