@@ -22,7 +22,7 @@ function MainContent() {
         Welcome to My City List
       </h2>
 
-      <p1
+      <p
         style={{
           lineHeight: "1.8",
           fontSize: "18px",
@@ -33,9 +33,9 @@ function MainContent() {
         Here you’ll find some of my favorite cities from around the world. Each
         city has unique cultures, landmarks, and unforgettable experiences to
         explore. 🌍
-      </p1>
+      </p>
 
-      <p2>
+      <p
         style={{
           marginTop: "15px",
           fontSize: "18px",
@@ -45,7 +45,7 @@ function MainContent() {
         }}
       >
         I love to visit New York, Paris, and Tokyo.
-      </p2>
+      </p>
     </main>
   );
 }
