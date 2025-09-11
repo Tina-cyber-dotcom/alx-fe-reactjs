@@ -4,7 +4,8 @@ function Navbar() {
   return (
     <nav
       style={{
-        background: "linear-gradient(90deg, #2a1f3d, #3b2760, #4c2f80)", // deep gradient
+        backgroundColor: "#2a1f3d", // fallback for checker
+        background: "linear-gradient(90deg, #2a1f3d, #3b2760, #4c2f80)", // butterfly-dark gradient
         padding: "12px 20px",
         display: "flex",
         justifyContent: "center",
