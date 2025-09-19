@@ -1,63 +1,37 @@
-import React from 'react'
-import { useRecipeStore } from './recipeStore'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react';
+import { useRecipeStore } from './recipeStore';
 
-const EditRecipeForm = ({ recipe, onDone }) => {
-  const updateRecipe = useRecipeStore((s) => s.updateRecipe)
-  const [title, setTitle] = React.useState(recipe.title || '')
-  const [description, setDescription] = React.useState(recipe.description || '')
-  const [ingredientsText, setIngredientsText] = React.useState(
-    (recipe.ingredients || []).join('\n')
-  )
- const [stepsText, setStepsText] = React.useState((recipe.steps || []).join('\n'))
-  const navigate = useNavigate()
+const EditRecipeForm = ({ recipe }) => {
+  const updateRecipe = useRecipeStore((state) => state.updateRecipe);
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const updated = {
-      title: title.trim(),
-      description: description.trim(),
-      ingredients: ingredientsText.split('\n').map((s) => s.trim()).filter(Boolean),
-      steps: stepsText.split('\n').map((s) => s.trim()).filter(Boolean),
-    }
+  const [title, setTitle] = useState(recipe.title);
+  const [description, setDescription] = useState(recipe.description);
 
-    updateRecipe(recipe.id, updated)
-    if (typeof onDone === 'function') onDone()
-    navigate(`/recipes/${recipe.id}`)
-  }
+  const handleSubmit = (event) => {
+    event.preventDefault(); 
+    updateRecipe(recipe.id, { title, description });
+  };
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: 'grid', gap: 8, maxWidth: 600 }}>
-      <label>
-        Title
-        <input value={title} onChange={(e) => setTitle(e.target.value)} required />
-      </label>
-
-      <label>
-        Description
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-      </label>
-
-      <label>
-        Ingredients (one per line)
-        <textarea value={ingredientsText} onChange={(e) => setIngredientsText(e.target.value)} />
-      </label>
-
-      <label>
-        Steps (one per line)
-        <textarea value={stepsText} onChange={(e) => setStepsText(e.target.value)} />
-      </label>
-
+    <form onSubmit={handleSubmit}>
       <div>
-        <button type="submit" style={{ marginRight: 8 }}>
-          Save
-        </button>
-        <button type="button" onClick={() => onDone?.()}>
-          Cancel
-        </button>
+        <label>Title</label>
+        <input
+          type="text"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+        />
       </div>
+      <div>
+        <label>Description</label>
+        <textarea
+          value={description}
+          onChange={(event) => setDescription(event.target.value)}
+        />
+      </div>
+      <button type="submit">Update Recipe</button>
     </form>
-  )
-}
+  );
+};
 
-export default EditRecipeForm
+export default EditRecipeForm;
