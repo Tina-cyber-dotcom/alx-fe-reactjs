@@ -1,40 +1,30 @@
 import { create } from 'zustand';
 
-const generateId = () => String(Date.now())
-
-export const useRecipeStore = create((set, get) => ({
-  recipes: [
-    {
-      id: '1',
-      title: 'Spaghetti Aglio e Olio',
-      description: 'Simple pasta with garlic, oil, chili flakes, parsley.',
-      ingredients: ['spaghetti', 'garlic', 'olive oil', 'chili flakes', 'parsley'],
-      steps: ['Boil pasta', 'Sauté garlic', 'Toss together'],
-    },
-    {
-      id: '2',
-      title: 'Avocado Toast',
-      description: 'Toasted bread with smashed avocado and lemon.',
-      ingredients: ['bread', 'avocado', 'lemon', 'salt'],
-      steps: ['Toast bread', 'Smash avocado', 'Top and serve'],
-    },
-  ],
+export const useRecipeStore = create((set) => ({
+  recipes: [],
+  searchTerm: '',
+  filteredRecipes: [],
 
   addRecipe: (recipe) =>
-    set((state) => ({
-      recipes: [...state.recipes, { ...recipe, id: recipe.id ?? generateId() }],
-    })),
+    set((state) => ({ recipes: [...state.recipes, recipe] })),
 
-  updateRecipe: (id, updatedFields) =>
+  updateRecipe: (id, updatedRecipe) =>
     set((state) => ({
-      recipes: state.recipes.map((r) => (r.id === id ? { ...r, ...updatedFields } : r)),
+      recipes: state.recipes.map((recipe) =>
+        recipe.id === id ? { ...recipe, ...updatedRecipe } : recipe
+      ),
     })),
 
   deleteRecipe: (id) =>
     set((state) => ({
-      recipes: state.recipes.filter((r) => r.id !== id),
+      recipes: state.recipes.filter((recipe) => recipe.id !== id),
     })),
 
-  getRecipeById: (id) => get().recipes.find((r) => r.id === id),
-}))
-
+  setSearchTerm: (term) =>
+    set((state) => {
+      const filtered = state.recipes.filter((recipe) =>
+        recipe.title.toLowerCase().includes(term.toLowerCase())
+      );
+      return { searchTerm: term, filteredRecipes: filtered };
+    }),
+}));
