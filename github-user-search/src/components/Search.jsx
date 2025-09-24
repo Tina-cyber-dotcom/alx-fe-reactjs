@@ -3,6 +3,8 @@ import { fetchUserData } from "../services/githubService";
 
 function Search() {
   const [query, setQuery] = useState("");
+  const [location, setLocation] = useState("");
+  const [minRepos, setMinRepos] = useState("");
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -14,7 +16,7 @@ function Search() {
     setUsers([]);
 
     try {
-      const data = await fetchUserData(query); // should return data.items
+      const data = await fetchUserData(query, location, minRepos); 
       if (data.items.length === 0) {
         setError("Looks like we can't find the user 😢");
       } else {
@@ -29,17 +31,31 @@ function Search() {
 
   return (
     <div className="w-full max-w-md">
-      <form onSubmit={handleSubmit} className="flex mb-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-2 mb-4">
         <input
           type="text"
           placeholder="Enter GitHub username"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-grow p-2 rounded-l-md border-2 border-purple-400 focus:outline-none focus:ring-2 focus:ring-pink-300"
+          className="p-2 rounded-md border-2 border-purple-400 focus:outline-none focus:ring-2 focus:ring-pink-300"
+        />
+        <input
+          type="text"
+          placeholder="Enter location (optional)"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          className="p-2 rounded-md border-2 border-purple-400 focus:outline-none focus:ring-2 focus:ring-pink-300"
+        />
+        <input
+          type="number"
+          placeholder="Minimum repos (optional)"
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
+          className="p-2 rounded-md border-2 border-purple-400 focus:outline-none focus:ring-2 focus:ring-pink-300"
         />
         <button
           type="submit"
-          className="bg-pink-400 text-black font-bold px-4 rounded-r-md hover:bg-pink-300 transition"
+          className="bg-pink-400 text-black font-bold px-4 py-2 rounded-md hover:bg-pink-300 transition"
         >
           Search
         </button>
