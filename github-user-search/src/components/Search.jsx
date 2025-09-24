@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { fetchUserData } from "../services/githubService";
 
 function Search() {
-  const [username, setUsername] = useState("");
-  const [user, setUser] = useState(null);
+  const [query, setQuery] = useState("");
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -11,11 +11,15 @@ function Search() {
     e.preventDefault();
     setLoading(true);
     setError("");
-    setUser(null);
+    setUsers([]);
 
     try {
-      const data = await fetchUserData(username);
-      setUser(data);
+      const data = await fetchUserData(query); // should return data.items
+      if (data.items.length === 0) {
+        setError("Looks like we can't find the user 😢");
+      } else {
+        setUsers(data.items);
+      }
     } catch (err) {
       setError("Looks like we can't find the user 😢");
     } finally {
@@ -29,8 +33,8 @@ function Search() {
         <input
           type="text"
           placeholder="Enter GitHub username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
           className="flex-grow p-2 rounded-l-md border-2 border-purple-400 focus:outline-none focus:ring-2 focus:ring-pink-300"
         />
         <button
@@ -44,25 +48,33 @@ function Search() {
       {loading && <p className="text-sky-400">Loading...</p>}
       {error && <p className="text-red-400">{error}</p>}
 
-      {user && (
-        <div className="bg-purple-800 p-4 rounded-md shadow-lg flex items-center space-x-4">
-          <img
-            src={user.avatar_url}
-            alt={user.login}
-            className="w-16 h-16 rounded-full border-2 border-pink-300"
-          />
-          <div>
-            <h2 className="text-pink-300 font-bold text-lg">{user.name || user.login}</h2>
-            <p className="text-sky-300">
-              <a href={user.html_url} target="_blank" rel="noopener noreferrer" className="underline">
-                View GitHub Profile
-              </a>
-            </p>
-            {user.location && <p className="text-purple-200">Location: {user.location}</p>}
-            <p className="text-purple-200">Public Repos: {user.public_repos}</p>
+      <div className="space-y-4">
+        {users.map((user) => (
+          <div
+            key={user.id}
+            className="bg-purple-800 p-4 rounded-md shadow-lg flex items-center space-x-4"
+          >
+            <img
+              src={user.avatar_url}
+              alt={user.login}
+              className="w-16 h-16 rounded-full border-2 border-pink-300"
+            />
+            <div>
+              <h2 className="text-pink-300 font-bold text-lg">{user.login}</h2>
+              <p className="text-sky-300">
+                <a
+                  href={user.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline"
+                >
+                  View GitHub Profile
+                </a>
+              </p>
+            </div>
           </div>
-        </div>
-      )}
+        ))}
+      </div>
     </div>
   );
 }
