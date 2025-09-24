@@ -1,25 +1,23 @@
 import { useState } from "react";
 import { fetchUserData } from "../services/githubService";
 
-export default function Search() {
-  const [query, setQuery] = useState("");
-  const [user, setUser] = useState(null);
+function Search() {
+  const [username, setUsername] = useState("");
+  const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!query.trim()) return;
-
     setLoading(true);
-    setError(null);
-    setUser(null);
+    setError("");
+    setUserData(null);
 
     try {
-      const data = await fetchUserData(query);
-      setUser(data);
+      const data = await fetchUserData(username);
+      setUserData(data);
     } catch (err) {
-      setError("Looks like we can't find the user");
+      setError("Looks like we cant find the user");
     } finally {
       setLoading(false);
     }
@@ -27,32 +25,29 @@ export default function Search() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="search-form">
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Search GitHub user..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter GitHub username"
         />
         <button type="submit">Search</button>
       </form>
 
       {loading && <p>Loading...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {user && (
-        <div className="user-card">
-          <img
-            src={user.avatar_url}
-            alt={user.login}
-            width="100"
-            style={{ borderRadius: "50%" }}
-          />
-          <h2>{user.name || user.login}</h2>
-          <a href={user.html_url} target="_blank" rel="noopener noreferrer">
-            Visit GitHub Profile
+      {error && <p>{error}</p>}
+      {userData && (
+        <div>
+          <img src={userData.avatar_url} alt={userData.login} width="100" />
+          <h2>{userData.name || userData.login}</h2>
+          <a href={userData.html_url} target="_blank" rel="noreferrer">
+            View Profile
           </a>
         </div>
       )}
     </div>
   );
 }
+
+export default Search;
