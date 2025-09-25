@@ -16,11 +16,12 @@ function Search() {
     setUsers([]);
 
     try {
-      const data = await fetchUserData(query, location, minRepos); 
-      if (data.items.length === 0) {
+      const results = await fetchUserData(query, location, minRepos);
+
+      if (!results || results.length === 0) {
         setError("Looks like we can't find the user 😢");
       } else {
-        setUsers(data.items);
+        setUsers(results);
       }
     } catch (err) {
       setError("Looks like we can't find the user 😢");
@@ -87,6 +88,14 @@ function Search() {
                   View GitHub Profile
                 </a>
               </p>
+              {user.location && (
+                <p className="text-purple-200">Location: {user.location}</p>
+              )}
+              {user.public_repos !== undefined && (
+                <p className="text-purple-200">
+                  Public Repos: {user.public_repos}
+                </p>
+              )}
             </div>
           </div>
         ))}
