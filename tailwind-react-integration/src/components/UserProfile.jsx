@@ -6,8 +6,8 @@ function UserProfile() {
         alt="User"
         className="rounded-full w-36 h-36 mx-auto"
       />
-      <h1 className="text-xl text-blue-800 my-4">John Doe</h1>
-      <p className="text-gray-600 text-base">
+      <h1 className="text-lg md:text-xl text-blue-800 my-4">John Doe</h1>
+      <p className="text-gray-600 text-sm">
         Developer at Example Co. Loves to write code and explore new
         technologies.
       </p>
@@ -16,5 +16,3 @@ function UserProfile() {
 }
 
 export default UserProfile;
-
-
