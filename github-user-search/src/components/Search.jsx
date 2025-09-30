@@ -13,7 +13,7 @@ function Search() {
     e.preventDefault();
     setLoading(true);
     setError("");
-    setUsers([]);
+    setUsers([]); 
 
     try {
       const results = await fetchUserData(query, location, minRepos);
