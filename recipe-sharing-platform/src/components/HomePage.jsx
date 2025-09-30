@@ -10,8 +10,12 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">🍳 Recipe Sharing Platform</h1>
+    <div className="p-6 relative">
+      <h1 className="text-3xl font-bold mb-6 text-center">
+        🍳 Recipe Sharing Platform
+      </h1>
+
+      {/* Recipe Grid */}
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {recipes.map((recipe) => (
           <Link
@@ -31,6 +35,14 @@ function HomePage() {
           </Link>
         ))}
       </div>
+
+      {/* Floating Add Recipe Button */}
+      <Link
+        to="/add"
+        className="fixed bottom-6 right-6 bg-blue-500 text-white rounded-full w-14 h-14 flex items-center justify-center text-2xl shadow-lg hover:bg-blue-600 transition"
+      >
+        ➕
+      </Link>
     </div>
   );
 }
