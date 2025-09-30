@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 
 function AddRecipeForm() {
@@ -27,7 +28,7 @@ function AddRecipeForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!validate()) return; // 
+    if (!validate()) return;
 
     const newRecipe = {
       id: Date.now(),
@@ -45,16 +46,18 @@ function AddRecipeForm() {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white rounded-2xl shadow-lg mt-10">
-      <h2 className="text-2xl font-bold mb-4 text-center">➕ Add a New Recipe</h2>
+    <div className="max-w-xl mx-auto p-6 bg-white rounded-2xl shadow-lg mt-10 md:mt-16">
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">
+        ➕ Add a New Recipe
+      </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-5 md:space-y-6">
         {/* Recipe Title */}
         <div>
-          <label className="block font-medium mb-1">Recipe Title</label>
+          <label className="block font-medium mb-2 md:mb-3">Recipe Title</label>
           <input
             type="text"
-            className="w-full border rounded-lg p-2"
+            className="w-full border rounded-lg p-2 md:p-3"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -65,9 +68,11 @@ function AddRecipeForm() {
 
         {/* Ingredients */}
         <div>
-          <label className="block font-medium mb-1">Ingredients (comma-separated)</label>
+          <label className="block font-medium mb-2 md:mb-3">
+            Ingredients (comma-separated)
+          </label>
           <textarea
-            className="w-full border rounded-lg p-2"
+            className="w-full border rounded-lg p-2 md:p-3"
             rows="3"
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
@@ -79,9 +84,11 @@ function AddRecipeForm() {
 
         {/* Preparation Steps */}
         <div>
-          <label className="block font-medium mb-1">Preparation Steps</label>
+          <label className="block font-medium mb-2 md:mb-3">
+            Preparation Steps
+          </label>
           <textarea
-            className="w-full border rounded-lg p-2"
+            className="w-full border rounded-lg p-2 md:p-3"
             rows="5"
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
@@ -94,7 +101,7 @@ function AddRecipeForm() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition"
+          className="w-full bg-blue-500 text-white p-2 md:p-3 rounded-lg hover:bg-blue-600 transition"
         >
           Submit Recipe
         </button>
