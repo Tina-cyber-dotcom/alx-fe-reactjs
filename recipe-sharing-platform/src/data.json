@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "Spaghetti Carbonara",
+    "summary": "A classic Italian pasta dish with eggs, cheese, pancetta, and pepper.",
+    "image": "https://images.unsplash.com/photo-1603133872878-684f04c8d64a"
+  },
+  {
+    "id": 2,
+    "title": "Avocado Toast",
+    "summary": "Crispy toast topped with smashed avocado, olive oil, and chili flakes.",
+    "image": "https://images.unsplash.com/photo-1551183053-bf91a1d81141"
+  },
+  {
+    "id": 3,
+    "title": "Chicken Curry",
+    "summary": "Tender chicken simmered in a fragrant blend of spices and coconut milk.",
+    "image": "https://images.unsplash.com/photo-1604909053172-36c6313f94b6"
+  },
+  {
+    "id": 4,
+    "title": "Vegetable Stir Fry",
+    "summary": "Colorful veggies sautéed with soy sauce and garlic for a quick, healthy meal.",
+    "image": "https://images.unsplash.com/photo-1617196039897-9c8d846c1b9a"
+  },
+  {
+    "id": 5,
+    "title": "Blueberry Pancakes",
+    "summary": "Fluffy pancakes filled with juicy blueberries and topped with maple syrup.",
+    "image": "https://images.unsplash.com/photo-1550317138-10000687a72b"
+  }
+]
