@@ -1,14 +1,18 @@
-import React from 'react'
-import PostsComponent from './PostsComponent'
+import React from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import PostsComponent from "./PostsComponent"; 
 
-function App() {
+const queryClient = new QueryClient();
+
+export default function App() {
   return (
-    <div className="App">
-      <h2>React Query Demo with JSONPlaceholder</h2>
-      <PostsComponent />
-    </div>
-  )
+    <QueryClientProvider client={queryClient}>
+      <div>
+        <h1>React Query Demo</h1>
+        <PostsComponent />
+      </div>
+    </QueryClientProvider>
+  );
 }
 
-export default App
 
