@@ -6,16 +6,16 @@ export default function PostsComponent() {
     const res = await fetch("https://jsonplaceholder.typicode.com/posts");
     if (!res.ok) throw new Error("Failed to fetch posts");
     return res.json();
-  };
-
+  }
   const {
     data: posts,
     isLoading,
     isError,
-    error,          
+    error,
     refetch,
   } = useQuery(["posts"], fetchPosts, {
-    cacheTime: 1000 * 60 * 5,         
+    cacheTime: 1000 * 60 * 5,        
+    staleTime: 1000 * 60 * 1,       
     refetchOnWindowFocus: false,     
     keepPreviousData: true,          
   });
@@ -42,5 +42,3 @@ export default function PostsComponent() {
     </div>
   );
 }
-
-
