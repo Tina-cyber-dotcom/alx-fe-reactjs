@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 export default function PostsComponent() {
   const fetchPosts = async () => {
     const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-    if (!res.ok) throw new Error("Network response was not ok");
+    if (!res.ok) throw new Error("Failed to fetch posts");
     return res.json();
   };
 
@@ -12,15 +12,17 @@ export default function PostsComponent() {
     data: posts,
     isLoading,
     isError,
+    error,          
     refetch,
   } = useQuery(["posts"], fetchPosts, {
-    cacheTime: 1000 * 60 * 5, 
-    refetchOnWindowFocus: false, 
-    keepPreviousData: true, 
+    cacheTime: 1000 * 60 * 5,         
+    refetchOnWindowFocus: false,     
+    keepPreviousData: true,          
   });
 
   if (isLoading) return <p>Loading posts...</p>;
-  if (isError) return <p>Error fetching posts.</p>;
+
+  if (isError) return <p>Error: {error.message}</p>;
 
   return (
     <div>
@@ -40,4 +42,5 @@ export default function PostsComponent() {
     </div>
   );
 }
+
 
